@@ -1,0 +1,31 @@
+---
+import Layout from "../../layouts/Layout.astro";
+const allposts = await Astro.glob('../../pages/posts/*.md')
+const alltags = [...new Set(allposts.map((post)=>post.frontmatter.tags).flat())]
+---
+
+<Layout>
+  <div class="divs_index">
+    {
+      alltags.map((tag) => (
+        <p>
+          <a href={`/tags/${tag}`}>{tag}</a>
+        </p>
+      ))
+    }
+  </div>
+</Layout>
+<style>
+  .divs_index > p {
+    background-color: brown;
+    padding: 1rem;
+  }
+  a {
+    text-decoration: none;
+    color: aquamarine;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>

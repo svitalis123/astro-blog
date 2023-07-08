@@ -1,25 +1,64 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import '../styles/global.css';
+const abouttitle = "about me";
+const identity = {
+  role: 'fullstackdeveloper',
+  description: 'lets build complex systems from simple systems',
+  hobbies: ['writing', 'reading']
+}
+
+const skills = ['react', 'ruby', 'ruby on rails', 'sql', 'postgresql']
+
+const cta = true
+const contact = false
+const socials = 2
+const skillcolor = "navy"
+const skillweight = 900
+const skillheight = 1.5
+const skillsize = "1.5rem"
 ---
 
 <Layout title="learn about us" >
   <main>
-    <a href="/">
-      Home
-    </a>
-    <a href="/about">
-      About
-    </a>
-    <a href="/blog">
-      blog
-    </a>
     <aside>
-      <h1>About Me</h1>
-      <h2>... and my new Astro site!</h2>
+      <h1>{abouttitle}</h1>
+      <h2>I am a {identity.role}</h2>
     
-      <p>I am working through Astro's introductory tutorial. <br> This is the second page on my website, and it's the first one I built myself!</p>
+      <p>{identity.description}</p>
     
-      <p>This site will update as I complete more of the tutorial, so keep checking back and see how my journey is going!</p>
+      <p>{identity.hobbies.length >= 2 && 
+        <p>my hobbies are {identity.hobbies[0]} and {identity.hobbies[1]}</p>
+      }</p>
+      <ul>
+        My skils are:
+        {
+          skills.map((skill) => (<li class="skill">{skill}</li>))
+        }
+      </ul>
+      {
+        cta && <p>Lets chat and build applications</p>
+      }
+      {
+        contact && <p>0712345678</p>
+      }
+      {
+        socials === 2 ? <b>contact me on linkedin and gmail</b> : <p>linkedin</p>
+      }
     </aside>
   </main>
 </Layout>
+
+<style define:vars={{skillcolor, skillheight, skillsize, skillweight}}>
+  h1 {
+    font-size: 4rem;
+    color: purple ;
+  }
+
+  .skill {
+    color: var(--skillcolor);
+    font-weight: var(--skillweight);
+    line-height: var(--skillheight);
+    font-size: var(--skillsize);
+  }
+</style>

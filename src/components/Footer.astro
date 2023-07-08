@@ -1,0 +1,27 @@
+---
+import Social from "./Social.astro";
+const username = "svitalis123"
+const socials = ["github", "facebook", "twitter"]
+const mycolor = "cyan"
+---
+
+<footer>
+  <p>
+    Follow me on
+    {
+      socials.map((social) => (
+        <Social platform={social} username={username}  />
+      ))
+    }
+  </p>
+</footer>
+
+<style define:vars={{mycolor}}>
+  footer {
+    background-color: var(--mycolor);
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+</style>

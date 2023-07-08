@@ -1,20 +1,13 @@
 ---
   import Layout from "../layouts/Layout.astro";
+  const blogs = "welcome to ian blogs"
+  const allposts = await Astro.glob('../pages/posts/*.md')
 ---
 
-<Layout title="the blog">
+<Layout title={blogs}>
   <article>
-    <a href="/">
-      Home
-    </a>
-    <a href="/about">
-      About
-    </a>
-    <a href="/blog">
-      blog
-    </a>
     <h1>
-      Companies cannot exist without customers. 
+      Companies cannot exist without customers. {blogs}
     </h1>
     <p>
       In order to construct an effective message, product marketers have to understand what makes consumers in a given target market tick. <br> 
@@ -22,5 +15,14 @@
       The boost in demand occurs because the way the product winds up being packaged and positioned makes the consumers see value in it. <br> In addition to this, 
       product marketing helps companies discover which buyer personas to target in the future.
     </p>
+    <ul>
+      {
+        allposts.map((post) => (
+          <li>
+            <a href={post.url}>{post.frontmatter.title}</a>
+          </li>
+        ))
+      }
+    </ul>
   </article>
 </Layout>

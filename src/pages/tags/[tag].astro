@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const allposts = await Astro.glob("../../pages/posts/*.md")
+  const getTags = [...new Set(allposts.map((post)=>post.frontmatter.tags).flat())]
+  // without automaticlly getting tags from posts
+  // return [
+  //   { params: { tag: "astro" }, props: {posts: allposts} },
+  //   { params: { tag: "successes" }, props: {posts: allposts} },
+  //   { params: { tag: "community" }, props: {posts: allposts} },
+  //   { params: { tag: "blogging" }, props: {posts: allposts} },
+  //   { params: { tag: "setbacks" }, props: {posts: allposts} },
+  //   { params: { tag: "learning in public" }, props: {posts: allposts} },
+  // ];
+
+  // automaically getting tags
+  return getTags.map((tag) => {
+    const filteredPosts = allposts.filter((post)=>post.frontmatter.tags?.includes(tag))
+    return {
+      params: {tag},
+      props: {posts: filteredPosts}
+    }
+  })
+}
+
+const { tag } = Astro.params;
+const {posts} = Astro.props;
+---
+<Layout title={tag}>
+  <p>Posts tagged with {tag}</p>
+  <ul>
+    {
+      posts.map((pos) => (
+        <li>
+          <a href={pos.url}>{pos.frontmatter.title}</a>
+        </li>
+      ))
+    }
+  </ul>
+
+</Layout>

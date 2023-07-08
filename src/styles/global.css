@@ -1,0 +1,12 @@
+:root {
+  --fontsize: 1.5rem;
+}
+
+html {
+  box-sizing: border-box;
+  background-color: aquamarine;
+}
+
+p {
+  font-size: var(--fontsize);
+}

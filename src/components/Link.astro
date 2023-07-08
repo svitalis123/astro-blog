@@ -1,0 +1,13 @@
+---
+const {links} = Astro.props
+---
+
+<a href={`/${links}`}>
+  {
+    links === '/' && "home"
+  }
+  
+  {
+    links !== '/' && links
+  }
+</a>
